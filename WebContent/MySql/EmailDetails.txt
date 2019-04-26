@@ -1,0 +1,17 @@
+uname : - infohr.diary@gmail.com
+upass: -Callisto@123
+
+
+
+
+smtp.gmail.com
+
+Requires SSL: Yes
+
+Requires TLS: Yes (if available)
+
+Requires Authentication: Yes
+
+Port for SSL: 465
+
+Port for TLS/STARTTLS: 587

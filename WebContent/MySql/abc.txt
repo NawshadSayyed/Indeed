@@ -1,0 +1,468 @@
+DROP TABLE IF EXISTS `candidate_details`;
+CREATE TABLE  `candidate_details` (
+  `candidate_id` int(10) unsigned NOT NULL auto_increment,
+  `job_app_id` int(10) unsigned NOT NULL default '0',
+  `cand_first_name` varchar(100) NOT NULL,
+  `cand_mid_name` varchar(100) NOT NULL,
+  `cand_last_name` varchar(100) NOT NULL,
+  `cand_email` varchar(100) NOT NULL,
+  `cand_phone` varchar(15) NOT NULL,
+  `cand_exp_year` int(10) unsigned NOT NULL default '0',
+  `cand_exp_month` int(10) unsigned NOT NULL default '0',
+  `cand_skils` varchar(100) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `cand_resume` blob,
+  `app_date` datetime NOT NULL,
+  PRIMARY KEY  (`candidate_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+DROP TABLE IF EXISTS `companydetails`;
+CREATE TABLE  `companydetails` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `uname` varchar(45) NOT NULL,
+  `upass` varchar(45) NOT NULL,
+  `fname` varchar(45) NOT NULL,
+  `lname` varchar(45) NOT NULL,
+  `mnumber` varchar(45) NOT NULL,
+  `wnumber` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `org_name` varchar(45) NOT NULL,
+  `cdate` datetime NOT NULL,
+  `edate` datetime NOT NULL,
+  `street` varchar(45) NOT NULL,
+  `city` varchar(45) NOT NULL,
+  `state` varchar(45) NOT NULL,
+  `country` varchar(45) NOT NULL,
+  `zipcode` varchar(45) NOT NULL,
+  `User_Type` varchar(45) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+DROP TABLE IF EXISTS `consultancydetails`;
+CREATE TABLE  `consultancydetails` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `uname` varchar(45) NOT NULL,
+  `upass` varchar(45) NOT NULL,
+  `fname` varchar(45) NOT NULL,
+  `lname` varchar(45) NOT NULL,
+  `mnumber` varchar(45) NOT NULL,
+  `lnumber` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `consultancyname` varchar(45) NOT NULL,
+  `c_date` datetime default NULL,
+  `street` varchar(45) NOT NULL,
+  `city` varchar(45) NOT NULL,
+  `state` varchar(45) NOT NULL,
+  `country` varchar(45) NOT NULL,
+  `zipcode` varchar(45) NOT NULL,
+  `User_Type` varchar(45) NOT NULL,
+  `e_Date` datetime default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `country`;
+CREATE TABLE  `country` (
+  `country_id` int(10) unsigned NOT NULL auto_increment,
+  `country_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`country_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `employer_jobpost`;
+CREATE TABLE  `employer_jobpost` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `job_title` varchar(100) NOT NULL,
+  `Company_Name` varchar(100) NOT NULL,
+  `Job_location` varchar(45) NOT NULL,
+  `job_type` varchar(45) NOT NULL,
+  `sal_from` decimal(18,0) NOT NULL default '0',
+  `sal_to` decimal(18,0) NOT NULL,
+  `sal_type` varchar(45) NOT NULL,
+  `job_summary` varchar(1000) NOT NULL,
+  `job_requirment` varchar(1000) NOT NULL,
+  `job_exp_skill_qulif` varchar(1000) NOT NULL,
+  `min_qulification` varchar(45) NOT NULL,
+  `exp_type` varchar(45) NOT NULL,
+  `exp_year` int(10) unsigned NOT NULL default '0',
+  `post_status` varchar(45) NOT NULL default 'Open',
+  `job_post_date` datetime NOT NULL,
+  `job_posted_by` varchar(100) NOT NULL,
+  `job_no_vacancies` decimal(18,0) NOT NULL default '0',
+  `job_category` varchar(100) NOT NULL,
+  `employer_id` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+DROP TABLE IF EXISTS `interview_feedback`;
+CREATE TABLE  `interview_feedback` (
+  `feed_id` int(10) unsigned NOT NULL auto_increment,
+  `Consultant_id` int(10) unsigned NOT NULL default '0',
+  `Candidate_id` int(10) unsigned NOT NULL default '0',
+  `schedules_id` int(10) unsigned NOT NULL default '0',
+  `technical_knowledge` varchar(45) NOT NULL,
+  `practical_knowlede` varchar(45) NOT NULL,
+  `communication_skill` varchar(45) NOT NULL,
+  `body_language` varchar(45) NOT NULL,
+  `Remark` varchar(45) NOT NULL,
+  `feedback_date` date NOT NULL,
+  PRIMARY KEY  (`feed_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `register`;
+CREATE TABLE  `register` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `uname` varchar(45) NOT NULL,
+  `upass` varchar(45) NOT NULL,
+  `UserType` varchar(45) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `schedulesinterviewdetails`;
+CREATE TABLE  `schedulesinterviewdetails` (
+  `Schedules_Id` int(10) unsigned NOT NULL auto_increment,
+  `Candidate_Id` int(10) unsigned NOT NULL default '0',
+  `Candidate_Name` varchar(100) NOT NULL,
+  `Interview_Date` datetime NOT NULL,
+  `Interview_start_time` time NOT NULL,
+  `Interview_end_time` time NOT NULL,
+  `Contact_person_name` varchar(100) character set latin1 collate latin1_bin NOT NULL,
+  `Contact_person_number` varchar(12) NOT NULL,
+  `Vanue_Details` varchar(500) NOT NULL,
+  `Job_id` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`Schedules_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `state`;
+CREATE TABLE  `state` (
+  `state_id` int(10) unsigned NOT NULL auto_increment,
+  `state_name` varchar(45) NOT NULL,
+  PRIMARY KEY  (`state_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+DROP VIEW IF EXISTS `interviewresult`;
+CREATE VIEW `interviewresult` AS select `i`.`feed_id` AS `feed_id`,`i`.`Consultant_id` AS `Consultant_id`,
+`i`.`Candidate_id` AS `Candidate_id`,`i`.`schedules_id` AS `schedules_id`,`i`.`technical_knowledge` AS `technical_knowledge`,
+`i`.`practical_knowlede` AS `practical_knowlede`,`i`.`communication_skill` AS `communication_skill`,`i`.
+`body_language` AS `body_language`,`i`.`Remark` AS `Remark`,`i`.`feedback_date` AS `feedback_date`,
+`c`.`job_app_id` AS `job_app_id`,concat(`c`.`cand_first_name`,_latin1' ',`c`.`cand_mid_name`,_latin1' ',
+`c`.`cand_last_name`) AS `Candidate_Name`,`c`.`cand_email` AS `cand_email`,`c`.`cand_phone` AS `cand_phone`,
+`si`.`Candidate_Name` AS `Interview_Name` from ((`interview_feedback` `i`
+join `candidate_details` `c` on((`i`.`Candidate_id` = `c`.`candidate_id`)))
+join `schedulesinterviewdetails` `si` on((`si`.`Candidate_Id` = `i`.`Candidate_id`)));
+
+
+
+
+DROP VIEW IF EXISTS `view_schedulesinterviewdetails`;
+CREATE VIEW  `view_schedulesinterviewdetails` AS select `s`.`Candidate_Id` AS `Candidate_Id`,
+`c`.`job_app_id` AS `job_app_id`,`c`.`cand_first_name` AS `cand_first_name`,
+`c`.`cand_mid_name` AS `cand_mid_name`,`c`.`cand_last_name` AS `cand_last_name`,`c`.`cand_email` AS `cand_email`,
+`c`.`cand_phone` AS `cand_phone`,`c`.`cand_exp_year` AS `cand_exp_year`,`c`.`cand_exp_month` AS `cand_exp_month`,
+`c`.`cand_skils` AS `cand_skils`,`c`.`location` AS `location`,`c`.`cand_resume` AS `cand_resume`,
+`c`.`app_date` AS `app_date`,`s`.`Schedules_Id` AS `Schedules_Id`,`s`.`Candidate_Name` AS `Candidate_Name`,`s`.`Interview_Date`
+AS `Interview_Date`,`s`.`Interview_start_time` AS `Interview_start_time`,`s`.`Interview_end_time` AS `Interview_end_time`,
+`s`.`Contact_person_name` AS `Contact_person_name`,`s`.`Contact_person_number` AS `Contact_person_number`,`s`.`Vanue_Details`
+AS `Vanue_Details`,`s`.`Job_id` AS `Job_id`,`e`.`job_title` AS `job_title`,`e`.`Company_Name` AS `Company_Name`,`e`.`Job_location`
+ AS `Job_location`,`e`.`job_type` AS `job_type`,`e`.`sal_from` AS `sal_from`,`e`.`sal_to` AS `sal_to`,`e`.`sal_type` AS `sal_type`
+ ,`e`.`job_summary` AS `job_summary`,`e`.`job_requirment` AS `job_requirment`,`e`.`job_exp_skill_qulif` AS `job_exp_skill_qulif`,
+ `e`.`min_qulification` AS `min_qulification`,`e`.`exp_type` AS `exp_type`,`e`.`exp_year` AS `exp_year`,`e`.`post_status` AS
+ `post_status`,`e`.`job_post_date` AS `job_post_date`,`e`.`job_posted_by` AS `job_posted_by`,`e`.`job_no_vacancies`
+ AS `job_no_vacancies`,`e`.`job_category` AS `job_category` from ((`schedulesinterviewdetails` `s` join `candidate_details`
+ `c` on((`s`.`Candidate_Id` = `c`.`candidate_id`))) join `employer_jobpost` `e` on((`e`.`id` = `s`.`Job_id`)));
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_authanticate`$$
+CREATE PROCEDURE  `sp_authanticate`(uname1 varchar(100),upass1 varchar(100))
+BEGIN
+
+SELECT r.id, r.uname, r.upass, r.UserType, IF(c.id > 0 , c.id, cd.id) as regis_id, c.fname, c.lname, c.mnumber, c.lnumber, c.email, c.consultancyname,
+c.c_date, c.street, c.city, c.state, c.country, c.zipcode,  c.e_Date,
+cd.fname as fname1, cd.lname as lname1, cd.mnumber as mnumber1, cd.email as email1, cd.org_name ,
+cd.cdate , cd.street as street1, cd.city as city1, cd.eDate FROM register r left join consultancydetails c on c.uname =r.uname left join companydetails cd on  cd.uname =r.uname where r.uname=uname1 and r.upass=upass1;
+
+
+END $$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_compny_delete_jobPost`$$
+CREATE  PROCEDURE  `sp_compny_delete_jobPost`(job_id int)
+BEGIN
+delete from employer_jobpost where id= job_id;
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_compny_insert_jobPost`$$
+CREATE PROCEDURE  `sp_compny_insert_jobPost`(txt_job_Title VARCHAR(100),txt_Company_Name VARCHAR(100),
+txt_job_location VARCHAR(45),ddl_Job_Type  VARCHAR(45),txt_Sal_From DECIMAL(18,0),txt_Sal_To DECIMAL(18,0),ddl_Salary_Type VARCHAR(45),
+txt_JobSummary  VARCHAR(1000),txt_Job_Responsibility VARCHAR(1000),txt_Exp_qulif_skills VARCHAR(1000),
+ddl_Min_Qualification VARCHAR(45),ddl_Exp_Type VARCHAR(45),txt_Total_Exp INTEGER,ddl_Post_Status VARCHAR(45),
+txt_job_post_date datetime, txt_post_by VARCHAR(100),txt_No_vacancies  DECIMAL(18,0),job_category1 VARCHAR(100),employer_id1 integer
+)
+BEGIN
+insert into employer_jobpost(job_title,Company_Name,Job_location,job_type,sal_from, sal_to,sal_type, job_summary, job_requirment,
+ job_exp_skill_qulif, min_qulification, exp_type, exp_year, post_status, job_post_date, job_posted_by, job_no_vacancies,job_category,employer_id)
+values(txt_job_Title,txt_Company_Name,txt_job_location,ddl_Job_Type,txt_Sal_From,txt_Sal_To,ddl_Salary_Type,txt_JobSummary,
+txt_Job_Responsibility,txt_Exp_qulif_skills ,ddl_Min_Qualification,ddl_Exp_Type ,txt_Total_Exp ,ddl_Post_Status,txt_job_post_date,
+txt_post_by,txt_No_vacancies,job_category1,employer_id1);
+END $$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_compny_update_jobPost`$$
+CREATE  PROCEDURE  `sp_compny_update_jobPost`(txt_job_Title VARCHAR(100),txt_Company_Name VARCHAR(100),
+txt_job_location VARCHAR(45),ddl_Job_Type  VARCHAR(45),txt_Sal_From DECIMAL(18,0),txt_Sal_To DECIMAL(18,0),ddl_Salary_Type VARCHAR(45),
+txt_JobSummary  VARCHAR(1000),txt_Job_Responsibility VARCHAR(1000),txt_Exp_qulif_skills VARCHAR(1000),
+ddl_Min_Qualification VARCHAR(45),ddl_Exp_Type VARCHAR(45),txt_Total_Exp INTEGER,ddl_Post_Status VARCHAR(45),
+txt_job_post_date datetime, txt_post_by VARCHAR(100),txt_No_vacancies  DECIMAL(18,0),job_category1 VARCHAR(100),job_id int)
+BEGIN
+update employer_jobpost set job_title =txt_job_Title,Company_Name=txt_Company_Name,Job_location=txt_job_location,job_type=ddl_Job_Type,sal_from=txt_Sal_From, sal_to=txt_Sal_To,
+sal_type=ddl_Salary_Type, job_summary=txt_JobSummary, job_requirment=txt_Job_Responsibility, job_exp_skill_qulif=txt_Exp_qulif_skills
+, min_qulification=ddl_Min_Qualification, exp_type=ddl_Exp_Type, exp_year=txt_Total_Exp, post_status=ddl_Post_Status,
+job_post_date =txt_job_post_date, job_posted_by=txt_post_by, job_no_vacancies=txt_No_vacancies,job_category=job_category1 where id = job_id;
+
+END $$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_delerte_candidate_details`$$
+CREATE  PROCEDURE `sp_delerte_candidate_details`(candidate_id1 integer)
+BEGIN
+delete from candidate_details where candidate_id=candidate_id1;
+END $$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_delete_company`$$
+CREATE PROCEDURE `sp_delete_company`(iid int(11))
+BEGIN
+delete from companydetails where id = iid;
+END $$
+
+DELIMITER ;
+
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_delete_consultancy`$$
+CREATE PROCEDURE  `sp_delete_consultancy`(iid int(11))
+BEGIN
+delete from register where uname= (select uname from consultancydetails where id=iid);
+delete from consultancydetails where id=iid;
+
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_delete_feedback`$$
+CREATE PROCEDURE  `sp_delete_feedback`(feed_id1 integer)
+BEGIN
+delete from interview_feedback where feed_id =feed_id1;
+END $$
+
+DELIMITER ;
+
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_InserEmployer`$$
+CREATE PROCEDURE  `sp_InserEmployer`(uname varchar(45), upass varchar(45), fname varchar(45), lname varchar(45), mnumber varchar(45), wnumber varchar(45), email varchar(45), org_name varchar(45), cdate date, edate date, street varchar(45), city varchar(45), state varchar(45), country varchar(45), zipcode varchar(45),User_Type varchar(45))
+BEGIN
+INSERT INTO  companydetails(uname, upass, fname, lname, mnumber, wnumber, email, org_name, cdate, edate, street, city, state, country, zipcode,User_Type) VALUES(uname, upass, fname, lname, mnumber, wnumber, email, org_name, cdate, edate, street, city, state, country, zipcode, User_Type);
+INSERT INTO register(uname,upass,UserType)values(uname,upass,User_Type);
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_insert_candidate_details`$$
+CREATE  PROCEDURE `sp_insert_candidate_details`(job_app_id integer,cand_first_name varchar(100),cand_mid_name varchar(100),cand_last_name varchar(100),cand_email varchar(100),cand_phone varchar(100),cand_exp_year integer,cand_exp_month integer,cand_skils varchar(100),location varchar(100),cand_resume blob,app_date date)
+BEGIN
+insert into candidate_details(job_app_id,cand_first_name,cand_mid_name,cand_last_name,cand_email,cand_phone,
+cand_exp_year,cand_exp_month,cand_skils,location,cand_resume,app_date)values(job_app_id,cand_first_name,
+cand_mid_name,cand_last_name,cand_email,cand_phone,cand_exp_year,cand_exp_month,cand_skils,location,cand_resume,app_date);
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_insert_consultancy`$$
+CREATE PROCEDURE `sp_insert_consultancy`($uname varchar(45), $upass varchar(45), $fname varchar(45), $lname varchar(45), $mnumber varchar(45), $lnumber varchar(45), $email varchar(45), $consultancyname varchar(45), $c_date date, $street varchar(45), $city varchar(45), $state varchar(45), $country varchar(45), $zipcode varchar(45), $e_date date, $User_Type varchar(45))
+BEGIN
+INSERT INTO consultancydetails(uname, upass, fname, lname, mnumber, lnumber, email, consultancyname, c_date, street, city, state, country, zipcode,e_date,User_Type) values($uname, $upass, $fname, $lname, $mnumber, $lnumber, $email, $consultancyname, $c_date, $street, $city, $state, $country, $zipcode,$e_date,$User_Type);
+INSERT INTO register(uname,upass,UserType)values($uname,$upass,$User_Type);
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_insert_feedback`$$
+CREATE  PROCEDURE `sp_insert_feedback`(Consultant_id1 integer, Candidate_id1 integer, schedules_id1 integer, technical_knowledge1 varchar(100), practical_knowlede1 varchar(100), communication_skill1 varchar(100), body_language1 varchar(100), Remark1 varchar(500), feedback_date1 date )
+BEGIN
+insert into interview_feedback(Consultant_id, Candidate_id, schedules_id, technical_knowledge, practical_knowlede, communication_skill, body_language, Remark, feedback_date)
+values( Consultant_id1, Candidate_id1, schedules_id1, technical_knowledge1, practical_knowlede1, communication_skill1, body_language1, Remark1, feedback_date1);
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_sch_delete_candidate`$$
+CREATE PROCEDURE  `sp_sch_delete_candidate`(Schedules_Id1 Integer)
+BEGIN
+delete from SchedulesInterviewDetails where Schedules_Id=Schedules_Id1;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_sch_int_insert_candidate`$$
+CREATE PROCEDURE `sp_sch_int_insert_candidate`(Job_id1 INTEGER,Candidate_Id1 INTEGER ,Candidate_Name1 VARCHAR(100),
+Interview_Date1 DATETIME ,Interview_start_time1 TIME,Interview_end_time1 TIME,Contact_person_name1 VARCHAR(100),Contact_person_number1 VARCHAR(12),
+Vanue_Details1 VARCHAR(500))
+BEGIN
+insert into SchedulesInterviewDetails(Job_id,Candidate_Id,Candidate_Name,Interview_Date,Interview_start_time,Interview_end_time,Contact_person_name,Contact_person_number,
+Vanue_Details) values(Job_id1,Candidate_Id1,Candidate_Name1,Interview_Date1,Interview_start_time1,Interview_end_time1,Contact_person_name1,Contact_person_number1,Vanue_Details1);
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_sch_int_update_candidate`$$
+CREATE  PROCEDURE `sp_sch_int_update_candidate`(Job_id1 INTEGER,Candidate_Id1 INTEGER ,Candidate_Name1 VARCHAR(100),
+Interview_Date1 DATETIME ,Interview_start_time1 TIME,Interview_end_time1 TIME,Contact_person_name1 VARCHAR(100),Contact_person_number1 VARCHAR(12),
+Vanue_Details1 VARCHAR(500),Schedules_Id1 INTEGER)
+BEGIN
+update SchedulesInterviewDetails set Job_id=Job_id1,Candidate_Id=Candidate_Id1,Candidate_Name=Candidate_Name1,Interview_Date=Interview_Date1,Interview_start_time=Interview_start_time1,Interview_end_time=Interview_end_time1,Contact_person_name=Contact_person_name1,Contact_person_number=Contact_person_number1,
+Vanue_Details=Vanue_Details1 where Schedules_Id=Schedules_Id1;
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_upd_company`$$
+CREATE  PROCEDURE `sp_upd_company`(uname varchar(45), upass varchar(45), fname varchar(45), lname varchar(45), mnumber varchar(45), wnumber varchar(45), email varchar(45), org_name varchar(45), cdate date, edate date, street varchar(45), city varchar(45), state varchar(45), country varchar(45), zipcode varchar(45),iid int(11))
+BEGIN
+update companydetails set uname = uname, upass =upass, fname=fname, lname =lname, mnumber=mnumber, wnumber =wnumber , email =email, org_name =org_name, cdate=cdate , edate=edate, street=street, city=city, state=state, country=country, zipcode =zipcode where id = iid;
+END $$
+
+DELIMITER ;
+
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_upd_consultancy`$$
+CREATE  PROCEDURE  `sp_upd_consultancy`($uname varchar(45), $upass varchar(45), $fname varchar(45), $lname varchar(45), $mnumber varchar(45), $lnumber varchar(45), $email varchar(45), $consultancyname varchar(45), $c_date date, $street varchar(45), $city varchar(45), $state varchar(45), $country varchar(45), $zipcode varchar(45), $User_Type varchar(45),$e_date date,iid int(11))
+BEGIN
+update consultancydetails set uname =$uname, upass=$upass, fname=$fname, lname=$lname, mnumber=$mnumber, lnumber=$lnumber, email=$email, consultancyname=$consultancyname, c_date=$c_date, street=$street, city=$city, state=$state, country=$country, zipcode=$zipcode,User_Type=$User_Type,e_date=$e_date where id =iid;
+END $$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_update_candidate_details`$$
+CREATE  PROCEDURE  `sp_update_candidate_details`(job_app_id1 integer,cand_first_name1 varchar(100),cand_mid_name1 varchar(100),cand_last_name1 varchar(100),cand_email1 varchar(100),cand_phone1 varchar(100),cand_exp_year1 integer,cand_exp_month1 integer,cand_skils1 varchar(100),location1 varchar(100),cand_resume1 blob,app_date1 date,candidate_details1 integer)
+BEGIN
+update candidate_details set job_app_id=job_app_id1,cand_first_name=cand_first_name1,cand_mid_name=cand_mid_name1,cand_last_name=cand_last_name1,cand_email=cand_email1,cand_phone=cand_phone1,cand_exp_year=cand_exp_year1,cand_exp_month=cand_exp_month1,cand_skils=cand_skils1,location=location1,cand_resume=cand_resume1,app_date=app_date1 where candidate_id=candidate_id1;
+END $$
+
+DELIMITER ;
+
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_update_employer_password`$$
+CREATE  PROCEDURE  `sp_update_employer_password`(auth_id int,regis_id1 int,new_password varchar(100))
+BEGIN
+update register set  upass =new_password where  id =auth_id;
+update companydetails set upass=new_password where id = regis_id1;
+END $$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_update_feedback`$$
+CREATE  PROCEDURE  `sp_update_feedback`(Consultant_id1 integer, Candidate_id1 integer, schedules_id1 integer, technical_knowledge1 varchar(100), practical_knowlede1 varchar(100), communication_skill1 varchar(100), body_language1 varchar(100), Remark1 varchar(500), feedback_date1 date, feed_id1 integer)
+BEGIN
+update interview_feedback set Consultant_id =Consultant_id1 , Candidate_id=Candidate_id1, schedules_id=schedules_id1, technical_knowledge=technical_knowledge1, practical_knowlede=practical_knowlede1, communication_skill=communication_skill1, body_language=body_language1, Remark=Remark1, feedback_date=feedback_date1 where feed_id=feed_id1;
+END $$
+
+DELIMITER ;
+
+
+
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `sp_updateConsultancy_password`$$
+CREATE  PROCEDURE `sp_updateConsultancy_password`(auth_id int,regis_id1 int,new_password varchar(100))
+BEGIN
+update register set  upass =new_password where  id =auth_id;
+update consultancydetails set upass=new_password where id = regis_id1;
+END $$
+
+DELIMITER ;
+
+

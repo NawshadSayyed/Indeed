@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Indeed</display-name>
+  <welcome-file-list>
+    <welcome-file>Home.jsp</welcome-file>
+  </welcome-file-list>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+  <context-param>
+    <param-name>driverName</param-name>
+    <param-value>com.mysql.jdbc.Driver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>conURL</param-name>
+    <param-value>jdbc:mysql://localhost:3306/consult_db</param-value>
+  </context-param>
+  <context-param>
+    <param-name>Uname</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>Upass</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  
+  
+  <!-- <context-param>
+    <param-name>conURL</param-name>
+    <param-value>jdbc:mysql://199.79.62.23:3306/Consult_DB</param-value>
+  </context-param>
+  <context-param>
+    <param-name>Uname</param-name>
+    <param-value>Consult_Admin</param-value>
+  </context-param>
+  <context-param>
+    <param-name>Upass</param-name>
+    <param-value>Callisto@123</param-value>
+  </context-param> -->
+  <context-param>
+    <param-name>host</param-name>
+    <param-value>smtp.gmail.com</param-value>
+  </context-param>
+  <context-param>
+    <param-name>port</param-name>
+    <param-value>587</param-value>
+  </context-param>
+  <context-param>
+    <param-name>user</param-name>
+    <param-value>infohr.diary@gmail.com</param-value>
+  </context-param>
+  <context-param>
+    <param-name>pass</param-name>
+    <param-value>Callisto@123</param-value>
+  </context-param>
+</web-app>
